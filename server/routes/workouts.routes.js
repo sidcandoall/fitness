@@ -1,3 +1,4 @@
+console.log("WORKOUT ROUTES LOADED");
 import express from "express";
 import authMiddleware from "../middleware/auth.middleware.js";
 import {

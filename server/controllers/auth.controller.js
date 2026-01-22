@@ -6,6 +6,12 @@ export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
+    if (!name || !email || !password) {
+      return res.status(400).json({
+        message: "Name, email, and password are required"
+      });
+    }
+
     const existingUser = await prisma.user.findUnique({
       where: { email }
     });
@@ -37,9 +43,11 @@ export const registerUser = async (req, res) => {
       }
     });
   } catch (error) {
+    console.error(error); 
     res.status(500).json({ message: "Registration failed" });
   }
 };
+
 
 export const loginUser = async (req, res) => {
   try {
