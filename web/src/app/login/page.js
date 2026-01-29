@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import styles from "./auth.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -30,12 +32,7 @@ export default function LoginPage() {
         throw new Error(data.message || "Login failed");
       }
 
-      // TEMP storage (works for now)
       localStorage.setItem("token", data.token);
-
-      console.log("LOGIN SUCCESS:", data);
-
-      // Redirect after login
       router.push("/dashboard");
     } catch (err) {
       setError(err.message);
@@ -45,32 +42,52 @@ export default function LoginPage() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "60px auto" }}>
-      <h2>Login</h2>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <h1>💪 Fitness Tracker</h1>
+          <p>Track your fitness journey</p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+            />
+          </div>
 
-        <input
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <div className={styles.inputGroup}>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+            />
+          </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+          {error && <div className={styles.error}>{error}</div>}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+          <button type="submit" disabled={loading} className={styles.submitBtn}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
+        </form>
+
+        <div className={styles.footer}>
+          <p>
+            Don't have an account?{" "}
+            <Link href="/register" className={styles.link}>
+              Register here
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

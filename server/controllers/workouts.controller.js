@@ -7,11 +7,19 @@ export const createWorkout = async (req, res) => {
       data: {
         date: new Date(),
         userId: req.user.id
+      },
+      include: {
+        exercises: {
+          include: {
+            sets: true
+          }
+        }
       }
     });
 
     res.status(201).json(workout);
   } catch (error) {
+    console.error("Create workout error:", error);
     res.status(500).json({ message: "Failed to create workout" });
   }
 };

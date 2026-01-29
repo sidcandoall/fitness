@@ -4,6 +4,9 @@ dotenv.config();
 import express from "express";
 import cors from "cors";
 import authRoutes from "./routes/auth.routes.js";
+import workoutRoutes from "./routes/workouts.routes.js";
+import exercisesRoutes from "./routes/exercises.routes.js";
+import setsRoutes from "./routes/sets.routes.js";
 
 const app = express();
 
@@ -22,6 +25,9 @@ app.options("*", cors());
 app.use(express.json());
 
 app.use("/auth", authRoutes);
+app.use("/api/workouts", workoutRoutes);
+app.use("/exercises", exercisesRoutes);
+app.use("/sets", setsRoutes);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {

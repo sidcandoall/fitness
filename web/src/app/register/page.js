@@ -1,17 +1,23 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import styles from "./auth.module.css";
 
 export default function RegisterPage() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess(false);
     setLoading(true);
 
     try {
@@ -29,8 +35,11 @@ export default function RegisterPage() {
         throw new Error(data.message || "Registration failed");
       }
 
-      console.log("REGISTER SUCCESS:", data);
-      alert("Registration successful!");
+      setSuccess(true);
+      localStorage.setItem("token", data.token);
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 1000);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -39,39 +48,72 @@ export default function RegisterPage() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "60px auto" }}>
-      <h2>Register</h2>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <div className={styles.header}>
+          <h1>💪 Fitness Tracker</h1>
+          <p>Create your account</p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <form onSubmit={handleSubmit} className={styles.form}>
+          <div className={styles.inputGroup}>
+            <label>Full Name</label>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="John Doe"
+              required
+            />
+          </div>
 
-        <input
-          placeholder="Email"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+          <div className={styles.inputGroup}>
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="your@email.com"
+              required
+            />
+          </div>
 
-        <input
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+          <div className={styles.inputGroup}>
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="••••••••"
+              required
+            />
+          </div>
 
-        <button type="submit" disabled={loading}>
-          {loading ? "Registering..." : "Register"}
-        </button>
-      </form>
+          {error && <div className={styles.error}>{error}</div>}
+          {success && (
+            <div className={styles.success}>
+              Registration successful! Redirecting...
+            </div>
+          )}
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+          <button
+            type="submit"
+            disabled={loading || success}
+            className={styles.submitBtn}
+          >
+            {loading ? "Registering..." : "Register"}
+          </button>
+        </form>
+
+        <div className={styles.footer}>
+          <p>
+            Already have an account?{" "}
+            <Link href="/login" className={styles.link}>
+              Login here
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 }

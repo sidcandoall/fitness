@@ -1,0 +1,402 @@
+.container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.header h1 {
+  margin: 0;
+  color: #333;
+  font-size: 28px;
+}
+
+.logoutBtn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.logoutBtn:hover {
+  background: #ff5252;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.createBtn {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  padding: 12px 24px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 20px;
+  transition: all 0.3s;
+}
+
+.createBtn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(102, 126, 234, 0.4);
+}
+
+.workoutsList {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.emptyState {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  text-align: center;
+  color: #999;
+  font-size: 18px;
+}
+
+.workoutCard {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.workoutCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+}
+
+.workoutHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  transition: background 0.3s;
+}
+
+.workoutHeader:hover {
+  background: linear-gradient(135deg, #5568d3 0%, #6a3f94 100%);
+}
+
+.workoutHeader h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+}
+
+.exerciseCount {
+  margin: 0;
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.toggleIcon {
+  font-size: 12px;
+  transition: transform 0.3s;
+}
+
+.workoutDetails {
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
+.exercisesList {
+  margin-bottom: 20px;
+}
+
+.exerciseCard {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 4px solid #667eea;
+}
+
+.exerciseCard h4 {
+  margin: 0 0 10px 0;
+  color: #333;
+  text-transform: capitalize;
+}
+
+.setsList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.setItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #555;
+  border: 1px solid #ddd;
+}
+
+.deleteSetBtn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s;
+}
+
+.deleteSetBtn:hover {
+  background: #ff5252;
+}
+
+.addSetForm {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.addSetForm input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.addSetForm input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.addSetBtn {
+  background: #51cf66;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.addSetBtn:hover {
+  background: #40c057;
+}
+
+.addExerciseForm {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}
+
+.addExerciseForm input {
+  flex: 1;
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.addExerciseForm input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+}
+
+.addExerciseBtn {
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.addExerciseBtn:hover {
+  background: #5568d3;
+}
+
+.deleteBtn {
+  width: 100%;
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.deleteBtn:hover {
+  background: #ff5252;
+}
+
+.error {
+  background: #ffe0e0;
+  color: #d32f2f;
+  padding: 12px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  border-left: 4px solid #d32f2f;
+}
+
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+  }
+
+  .header h1 {
+    font-size: 24px;
+  }
+
+  .addSetForm,
+  .addExerciseForm {
+    flex-direction: column;
+  }
+
+  .workoutHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .toggleIcon {
+    align-self: flex-end;
+    margin-top: -35px;
+  }
+}
+
+/* Draft Workout Styles */
+.draftWorkout {
+  background: white;
+  border: 3px dashed #667eea;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+}
+
+.draftWorkout h2 {
+  margin: 0 0 8px 0;
+  color: #667eea;
+  font-size: 22px;
+}
+
+.draftWorkout p {
+  margin: 0 0 20px 0;
+  color: #666;
+  font-style: italic;
+}
+
+.draftExercises {
+  background: #f8f9ff;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 15px 0;
+}
+
+.draftExercises h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.draftExercises ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.draftExercises li {
+  padding: 8px 0;
+  color: #555;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.draftExercises li:last-child {
+  border-bottom: none;
+}
+
+.draftActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.saveBtn {
+  background: #51cf66;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.saveBtn:hover {
+  background: #40c057;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(81, 207, 102, 0.3);
+}
+
+.cancelBtn {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.3s;
+  flex: 1;
+}
+
+.cancelBtn:hover {
+  background: #ff5252;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+}
