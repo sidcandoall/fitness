@@ -4,6 +4,8 @@
   "scripts": {
     "dev": "node index.js",
     "start": "node index.js",
+    "build": "npx prisma generate",
+    "postbuild": "npx prisma migrate deploy",
     "prisma": "prisma"
   },
   "dependencies": {
