@@ -10,8 +10,9 @@ export async function DELETE(req, { params }) {
 
   try {
     const { id } = await params;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
     
-    const res = await fetch(`http://localhost:5001/api/workouts/${id}`, {
+    const res = await fetch(`${apiUrl}/api/workouts/${id}`, {
       method: "DELETE",
       headers: {
         "Authorization": authHeader,

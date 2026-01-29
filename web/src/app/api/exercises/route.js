@@ -10,8 +10,9 @@ export async function POST(req) {
 
   try {
     const body = await req.json();
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
     
-    const res = await fetch("http://localhost:5001/exercises", {
+    const res = await fetch(`${apiUrl}/exercises`, {
       method: "POST",
       headers: {
         "Authorization": authHeader,

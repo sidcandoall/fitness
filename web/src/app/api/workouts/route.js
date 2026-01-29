@@ -10,7 +10,8 @@ export async function GET(req) {
   }
 
   try {
-    const res = await fetch("http://localhost:5001/api/workouts", {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
+    const res = await fetch(`${apiUrl}/api/workouts`, {
       method: "GET",
       headers: {
         "Authorization": authHeader,
@@ -42,8 +43,9 @@ export async function POST(req) {
 
   try {
     const body = await req.json();
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5001";
     
-    const res = await fetch("http://localhost:5001/api/workouts", {
+    const res = await fetch(`${apiUrl}/api/workouts`, {
       method: "POST",
       headers: {
         "Authorization": authHeader,
