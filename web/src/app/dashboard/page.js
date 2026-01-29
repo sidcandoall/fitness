@@ -21,7 +21,7 @@ export default function DashboardPage() {
   const fetchWorkouts = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
+      let token = localStorage.getItem("token");
 
       if (!token) {
         setError("No authentication token. Please login.");
@@ -29,6 +29,7 @@ export default function DashboardPage() {
         return;
       }
 
+      token = token.trim();
       console.log("Fetching workouts with token:", token.substring(0, 20) + "...");
 
       const res = await fetch("/api/workouts", {

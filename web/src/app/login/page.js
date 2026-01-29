@@ -32,7 +32,13 @@ export default function LoginPage() {
         throw new Error(data.message || "Login failed");
       }
 
-      localStorage.setItem("token", data.token);
+      const token = data.token ? data.token.trim() : null;
+      if (!token) {
+        throw new Error("No token received from server");
+      }
+
+      console.log("Token received, length:", token.length);
+      localStorage.setItem("token", token);
       router.push("/dashboard");
     } catch (err) {
       setError(err.message);

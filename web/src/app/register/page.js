@@ -35,8 +35,14 @@ export default function RegisterPage() {
         throw new Error(data.message || "Registration failed");
       }
 
+      const token = data.token ? data.token.trim() : null;
+      if (!token) {
+        throw new Error("No token received from server");
+      }
+
+      console.log("Token received, length:", token.length);
       setSuccess(true);
-      localStorage.setItem("token", data.token);
+      localStorage.setItem("token", token);
       setTimeout(() => {
         router.push("/dashboard");
       }, 1000);
