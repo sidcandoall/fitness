@@ -4,6 +4,14 @@ import workoutRoutes from "./routes/workouts.routes.js";
 import exercisesRoutes from "./routes/exercises.routes.js";
 import setsRoutes from "./routes/sets.routes.js";
 
+console.log("Starting server...");
+console.log("Environment:", {
+  NODE_ENV: process.env.NODE_ENV,
+  PORT: process.env.PORT || 5001,
+  JWT_SECRET: process.env.JWT_SECRET ? "SET" : "NOT SET",
+  DATABASE_URL: process.env.DATABASE_URL ? "SET" : "NOT SET"
+});
+
 const app = express();
 
 app.use(express.json());
