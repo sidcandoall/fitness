@@ -36,8 +36,10 @@ export const registerUser = async (req, res) => {
       { expiresIn: "7d" }
     );
 
+    console.log("Token created for new user, length:", token.length);
+
     res.status(201).json({
-      token,
+      token: token.trim(),
       user: {
         id: user.id,
         name: user.name,
@@ -78,8 +80,10 @@ export const loginUser = async (req, res) => {
       { expiresIn: "7d" }
     );
 
+    console.log("Token created successfully, length:", token.length);
+
     res.json({
-      token,
+      token: token.trim(),
       user: {
         id: user.id,
         name: user.name,
