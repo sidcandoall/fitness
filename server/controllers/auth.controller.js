@@ -2,6 +2,8 @@ import prisma from "../lib/prisma.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
+const JWT_SECRET = process.env.JWT_SECRET || "default_secret_key_change_in_production";
+
 export const registerUser = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -30,7 +32,7 @@ export const registerUser = async (req, res) => {
 
     const token = jwt.sign(
       { id: user.id },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: "7d" }
     );
 
@@ -72,7 +74,7 @@ export const loginUser = async (req, res) => {
 
     const token = jwt.sign(
       { id: user.id },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: "7d" }
     );
 
