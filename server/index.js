@@ -8,6 +8,15 @@ const app = express();
 
 app.use(express.json());
 
+// Health check endpoint
+app.get("/", (req, res) => {
+  res.json({ status: "Server is running", message: "Fitness API is live! 💪" });
+});
+
+app.get("/health", (req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
 app.use("/auth", authRoutes);
 app.use("/api/workouts", workoutRoutes);
 app.use("/exercises", exercisesRoutes); 
