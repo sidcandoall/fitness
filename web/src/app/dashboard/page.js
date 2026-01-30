@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { PieChart, Pie, Cell, Legend, Tooltip, ResponsiveContainer } from "recharts";
 import styles from "./dashboard.module.css";
 
 export default function DashboardPage() {
@@ -270,6 +271,38 @@ export default function DashboardPage() {
     router.push("/login");
   };
 
+  // Calculate exercise with most weight
+  const getHeaviestExerciseData = () => {
+    const exerciseWeights = {};
+
+    workouts.forEach((workout) => {
+      if (Array.isArray(workout.exercises)) {
+        workout.exercises.forEach((exercise) => {
+          if (Array.isArray(exercise.sets)) {
+            const totalWeight = exercise.sets.reduce((sum, set) => sum + (set.weight || 0), 0);
+            if (totalWeight > 0) {
+              if (!exerciseWeights[exercise.name]) {
+                exerciseWeights[exercise.name] = 0;
+              }
+              exerciseWeights[exercise.name] += totalWeight;
+            }
+          }
+        });
+      }
+    });
+
+    // Convert to array and sort
+    const sorted = Object.entries(exerciseWeights)
+      .map(([name, weight]) => ({ name, value: weight }))
+      .sort((a, b) => b.value - a.value)
+      .slice(0, 5); // Top 5 exercises
+
+    return sorted.length > 0 ? sorted : [];
+  };
+
+  const chartData = getHeaviestExerciseData();
+  const COLORS = ["#FF6B6B", "#4ECDC4", "#45B7D1", "#FFA07A", "#98D8C8"];
+
   if (loading) {
     return (
       <div className={styles.container}>
@@ -290,6 +323,33 @@ export default function DashboardPage() {
       {error && <div className={styles.error}>{error}</div>}
 
       <div className={styles.content}>
+        {/* Heaviest Exercise Chart */}
+        {chartData.length > 0 && (
+          <div className={styles.chartContainer}>
+            <h2>💪 Exercise Progress (Total Weight)</h2>
+            <ResponsiveContainer width="100%" height={300}>
+              <PieChart>
+                <Pie
+                  data={chartData}
+                  cx="50%"
+                  cy="50%"
+                  labelLine={false}
+                  label={({ name, value }) => `${name}: ${value.toFixed(0)} lbs`}
+                  outerRadius={80}
+                  fill="#8884d8"
+                  dataKey="value"
+                >
+                  {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                  ))}
+                </Pie>
+                <Tooltip formatter={(value) => `${value.toFixed(0)} lbs`} />
+                <Legend />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        )}
+
         <button onClick={handleCreateWorkout} className={styles.createBtn}>
           + New Workout
         </button>
